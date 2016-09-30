@@ -1,0 +1,74 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../style/main.css">
+</head>
+<body>
+    <div class="content">
+        <div>
+            <label>Connection status: </label>
+            <span id="connection"></span>
+        </div>
+
+        <div>
+            <label>Cart</label>
+            <div>
+                <label>Total: $</label><span id="total"></span> <br>
+                <label>Count: </label><span id="count"></span>
+            </div>
+        </div>
+
+        <button id="add">Add Item</button>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="http://localhost:13000/js/ozpIwc-client.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script>
+        var iwc = new ozpIwc.Client('http://localhost:13000');
+
+        // Only need to call connect() explicitly when we need to handle the promise it returns
+        iwc.connect().then(function() {
+            $('#connection').text('Connected to IWC Bus with address: ' + iwc.address);
+        }).catch(function(error) {
+            $('#connection').text('Erro: ' + error);
+        });
+
+        var logShoppingCartList = function(value) {
+            console.log('Cart list', value);
+        };
+
+        var watchShoppingCart = function(change, done) {
+            console.log('shoppingCart change', change);
+
+            $('#total').text(change.newValue.total);
+            $('#count').text(change.newValue.count);
+        };
+
+        var watchbestBuyCart = function(change, done) {
+            console.log('bestBuyCart change', change);
+
+            $('#total').text(change.newValue.total);
+            $('#count').text(change.newValue.count);
+        };
+
+        // Get root-level shopping cart reference
+        var shoppingCart = new iwc.data.Reference('/shoppingCart', { collect: true });
+
+        // Setup bestBuy shopping cart data
+        var bestBuyCart = new iwc.data.Reference('/shoppingCart/bestBuy', { collect: true });
+        bestBuyCart.set({ total: 0, count: 0 });
+
+        // Log the list and setup some handlers
+        shoppingCart.list().then(logShoppingCartList);
+        shoppingCart.watch(watchShoppingCart);
+        bestBuyCart.watch(watchbestBuyCart);
+
+        // Add a click handler to create and add random items
+        $('#add').click(function() {
+            var newItem = window.createItem('bestBuy.com');
+            var itemRef = new iwc.data.Reference('/shoppingCart/bestBuy/' + newItem.upc);
+            itemRef.set(newItem);
+        });
+    </script>
+</body>
+</html>
