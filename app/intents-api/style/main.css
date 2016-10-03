@@ -1,0 +1,19 @@
+.content {
+    width: 75%;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+}
+
+.connection-container {
+    background: rgba(158, 56, 56, 0.75);
+    padding: 2px 4px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.connection-container.connected {
+    background: rgba(47, 181, 69, 0.75);
+}
