@@ -4,21 +4,23 @@
 </head>
 <body>
     <div class="content">
-        <div class="connection-container">
+        <div class="connection-container row">
             <span id="connection"></span>
         </div>
 
-        <div>
+        <div class="row">
             <label>Message: </label>
-            <input id="value">
+            <span><input id="value" placeholder="Enter a string message"></span>
         </div>
 
-        <div>
+        <div class="row">
             <button id="invoke-reverser">Reverse</button>
             <button id="invoke-capper">Capitzlie</button>
             <button id="invoke-all">Ask Me</button>
             <button id="broadcast">Broadcast</button>
         </div>
+
+        <div class="intent-log"></div>
     </div>
 
     <script src="http://localhost:13000/js/ozpIwc-client.min.js"></script>

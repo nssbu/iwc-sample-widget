@@ -41,8 +41,9 @@
     };
 
     var capitalizeInput = function(value) {
-        $('#result').text(value.toUpperCase());
-        return 'Capper finished!';
+        var output = value.toUpperCase();
+        $('#result').text(output);
+        return output;
     };
 
     functionRef.register(metaData, capitalizeInput)

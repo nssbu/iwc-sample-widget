@@ -44,6 +44,23 @@
 
     var logInvokeCallback = function(intentState, done) {
         console.log('Intent state:', intentState);
+
+        var logOutput = '<div class="intent-state">' +
+            '<div><label>State: </label>' + intentState.state + '</div>';
+
+        if (intentState.state !== 'init'){
+            logOutput += '<div><label>Handler: </label>' + intentState.handler.resource + '</div>';
+        }
+
+        if (intentState.state === 'complete') {
+            logOutput += '<div><label>Response: </label>' + intentState.response + '</div>';
+        }
+
+        logOutput += '</div>';
+
+        var intentLog = $('.intent-log');
+        intentLog.append(logOutput);
+        intentLog.scrollTop(intentLog[0].scrollHeight);
     };
 
     var reverseInput = function() {
@@ -65,7 +82,7 @@
     };
 
     var broadcastIntent = function() {
-        printRef.broadcast(getInputValue())
+        printRef.broadcast(getInputValue(), logInvokeCallback)
             .then(updateOutput)
             .catch(updateOutput);
     };

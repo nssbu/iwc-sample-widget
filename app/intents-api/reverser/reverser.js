@@ -41,8 +41,9 @@
     };
 
     var reverseInput = function(value) {
-        $('#result').text(value.split('').reverse().join(''));
-        return 'Reverser finished!';
+        var output = value.split('').reverse().join('');
+        $('#result').text(output);
+        return output;
     };
 
     functionRef.register(metaData, reverseInput)
