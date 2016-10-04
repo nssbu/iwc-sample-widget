@@ -8,6 +8,7 @@ var config = {
     data: './app/data-api/**/*',
     intents: {
         dest: './dist/intents-api',
+        main: './app/intents-api/index.html',
         css: './app/intents-api/style/**/*',
         vendor: './app/intents-api/vendor/**/*',
         capper: './app/intents-api/capper/**/*',
@@ -53,7 +54,11 @@ gulp.task('producer', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('intents', ['capper', 'reverser', 'producer']);
+gulp.task('intents', ['capper', 'reverser', 'producer'], function() {
+    return gulp.src(config.intents.main)
+        .pipe(gulp.dest(config.intents.dest))
+        .pipe(browserSync.stream());
+});
 
 gulp.task('serve', ['clean', 'landing', 'data', 'intents'], function() {
     browserSync.init({

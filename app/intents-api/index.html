@@ -1,0 +1,52 @@
+<html>
+<head>
+    <style>
+        body{
+            background: rgba(0, 0, 0, 0.15);
+            margin: 0;
+            padding: 0;
+        }
+
+        .row {
+            height: 40%;
+            margin: 10px 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .iframe-container {
+            width: 50%;
+        }
+
+        iframe {
+            width: 90%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .producer-container,
+        .reverser-container {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="iframe-container producer-container">
+            <iframe src="./producer"></iframe>
+        </div>
+
+        <div class="iframe-container reverser-container">
+            <iframe src="./producer"></iframe>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="iframe-container capper-container">
+            <iframe src="./producer"></iframe>
+        </div>
+    </div>
+</body>
+</html>
