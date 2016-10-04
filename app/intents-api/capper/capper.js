@@ -36,7 +36,7 @@
     $('#intent-name').text(INTENT_NAME);
 
     var metaData = {
-        label: 'Displays the value in an alert.',
+        label: 'Capper',
         icon: 'https://a2ua.com/alert/alert-001.jpg'
     };
 

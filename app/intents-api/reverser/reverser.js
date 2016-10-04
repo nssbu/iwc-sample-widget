@@ -36,7 +36,7 @@
     $('#intent-name').text(INTENT_NAME);
 
     var metaData = {
-        label: 'Logs the value to the html.',
+        label: 'Reverser',
         icon: 'https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png'
     };
 
