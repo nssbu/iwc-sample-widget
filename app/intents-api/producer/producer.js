@@ -42,6 +42,10 @@
         console.log(value);
     };
 
+    var clearLog = function() {
+        $('.intent-log').empty();
+    };
+
     var logInvokeCallback = function(intentState, done) {
         console.log('Intent state:', intentState);
 
@@ -91,4 +95,5 @@
     $('#invoke-capper').click(capitalizeInput);
     $('#invoke-all').click(invokeAll);
     $('#broadcast').click(broadcastIntent);
+    $('#clear-log').click(clearLog);
 })();
