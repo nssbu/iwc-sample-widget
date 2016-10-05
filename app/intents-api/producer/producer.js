@@ -45,7 +45,7 @@
     var logInvokeCallback = function(intentState, done) {
         console.log('Intent state:', intentState);
 
-        var logOutput = '<div class="intent-state">' +
+        var logOutput = '<div class="intent-state ' + intentState.state + '">' +
             '<div><label>State: </label>' + intentState.state + '</div>';
 
         if (intentState.state !== 'init'){

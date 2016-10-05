@@ -33,6 +33,31 @@ label {
 }
 
 .intent-state {
-    border-bottom: 1px solid;
-    margin: 2px 5px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.intent-state.init {
+    background: lightgrey;
+}
+
+.intent-state.choosing {
+    background: lightyellow;
+}
+
+.intent-state.delivering {
+    background: lightsalmon;
+}
+
+.intent-state.running {
+    background: lightskyblue;
+}
+
+.intent-state.complete {
+    background: lightgreen;
+}
+
+.intent-state.error {
+    background: lightcoral;
 }
