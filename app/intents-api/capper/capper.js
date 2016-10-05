@@ -43,7 +43,12 @@
         var intentLog = $('.intent-log');
         var output = value.toUpperCase();
 
-        intentLog.append('<div><label>[' + intentUtils.getTimeString() + '] </label>'+ output + '</div>');
+        intentLog.append('<div>' +
+            '<label>[' + intentUtils.getTimeString() + '] </label>' +
+            '<label>Input: </label>' + value + ' ' +
+            '<label>Capitalized: </label>' + output +
+            '</div>');
+
         intentLog.scrollTop(intentLog[0].scrollHeight);
 
         return output;

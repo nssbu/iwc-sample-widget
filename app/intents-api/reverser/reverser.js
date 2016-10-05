@@ -43,7 +43,11 @@
         var intentLog = $('.intent-log');
         var output = value.split('').reverse().join('');
 
-        intentLog.append('<div><label>[' + intentUtils.getTimeString() + '] </label>'+ output + '</div>');
+        intentLog.append('<div>' +
+            '<label>[' + intentUtils.getTimeString() + '] </label>' +
+            '<label>Input: </label>' + value + ' ' +
+            '<label>Reversed: </label>' + output +
+            '</div>');
         intentLog.scrollTop(intentLog[0].scrollHeight);
 
         return output;
