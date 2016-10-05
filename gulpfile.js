@@ -68,6 +68,7 @@ gulp.task('serve', ['clean', 'landing', 'data', 'intents'], function() {
 
     gulp.watch(config.landing, ['landing']);
     gulp.watch(config.data, ['data']);
+    gulp.watch(config.intents.main, ['intents']);
     gulp.watch(config.intents.css, ['intents']);
     gulp.watch(config.intents.common, ['intents']);
     gulp.watch(config.intents.capper, ['capper']);
