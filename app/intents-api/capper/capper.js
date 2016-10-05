@@ -33,7 +33,6 @@
         .catch(getConnectionStatusHandler(false));
 
     var functionRef = new iwc.intents.Reference(INTENT_NAME);
-    $('#intent-name').text(INTENT_NAME);
 
     var metaData = {
         label: 'Capper',
@@ -48,8 +47,8 @@
 
     functionRef.register(metaData, capitalizeInput)
         .then(function() {
-            console.log('intent registered successfully');
+            $('#intent-name').text(INTENT_NAME);
         }).catch(function(error) {
-            console.log('intent registration failed', error);
+            $('#intent-name').text('Intent registration failed: ' + error);
         });
 })();
