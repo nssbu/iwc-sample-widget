@@ -11,6 +11,7 @@ var config = {
         main: './app/intents-api/index.html',
         css: './app/intents-api/style/**/*',
         vendor: './app/intents-api/vendor/**/*',
+        common: './app/intents-api/common/**/*',
         capper: './app/intents-api/capper/**/*',
         reverser: './app/intents-api/reverser/**/*',
         producer: './app/intents-api/producer/**/*'
@@ -37,19 +38,19 @@ gulp.task('data', function() {
 });
 
 gulp.task('capper', function() {
-    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor])
+    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor, config.intents.common])
         .pipe(gulp.dest(config.intents.dest + '/capper'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('reverser', function() {
-    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor])
+    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor, config.intents.common])
         .pipe(gulp.dest(config.intents.dest + '/reverser'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('producer', function() {
-    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor])
+    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor, config.intents.common])
         .pipe(gulp.dest(config.intents.dest + '/producer'))
         .pipe(browserSync.stream());
 });

@@ -39,21 +39,11 @@
         icon: 'https://a2ua.com/alert/alert-001.jpg'
     };
 
-    var getTimeString = function() {
-        var date = new Date();
-
-        var hours = (date.getHours() < 10 ? '0' : '') + date.getHours();
-        var minutes = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-        var seconds = (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
-
-        return hours + ':' + minutes + ':' + seconds;
-    };
-
     var capitalizeInput = function(value) {
         var intentLog = $('.intent-log');
         var output = value.toUpperCase();
 
-        intentLog.append('<div><label>[' + getTimeString() + '] </label>'+ output + '</div>');
+        intentLog.append('<div><label>[' + intentUtils.getTimeString() + '] </label>'+ output + '</div>');
         intentLog.scrollTop(intentLog[0].scrollHeight);
 
         return output;

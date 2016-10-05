@@ -39,26 +39,16 @@
         icon: 'https://d30y9cdsu7xlg0.cloudfront.net/png/62495-200.png'
     };
 
-    var getTimeString = function() {
-        var date = new Date();
-
-        var hours = (date.getHours() < 10 ? '0' : '') + date.getHours();
-        var minutes = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-        var seconds = (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
-
-        return hours + ':' + minutes + ':' + seconds;
-    };
-
     var reverseInput = function(value) {
         var intentLog = $('.intent-log');
         var output = value.split('').reverse().join('');
 
-        intentLog.append('<div><label>[' + getTimeString() + '] </label>'+ output + '</div>');
+        intentLog.append('<div><label>[' + intentUtils.getTimeString() + '] </label>'+ output + '</div>');
         intentLog.scrollTop(intentLog[0].scrollHeight);
 
         return output;
     };
-    
+
     functionRef.register(metaData, reverseInput)
         .then(function() {
             $('#intent-name').text(INTENT_NAME);
