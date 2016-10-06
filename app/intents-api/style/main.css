@@ -14,6 +14,10 @@ label {
     float: right;
 }
 
+input#value {
+    width: 75%;
+}
+
 .row {
     margin-bottom: 5px;
     width: 100%;
