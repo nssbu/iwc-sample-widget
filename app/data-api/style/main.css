@@ -1,16 +1,53 @@
 .content {
-    width: 75%;
+    width: 95%;
+    height: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-label {
+.item-container {
+    display: flex;
+}
+
+.item-list {
+    flex-grow: 1;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.item {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    margin: 2px 0;
+}
+
+.item-column {
+    margin: 0 15px;
+}
+
+.item .name, label {
     font-weight: bold;
+}
+
+#clear-log {
+    float: right;
+}
+
+input#value {
+    width: 75%;
+}
+
+.row {
+    margin-bottom: 5px;
+    width: 100%;
 }
 
 .connection-container {
     background: rgba(158, 56, 56, 0.75);
     padding: 2px 4px;
-    margin-bottom: 10px;
     border-radius: 5px;
 }
 
