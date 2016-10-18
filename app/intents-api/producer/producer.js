@@ -33,6 +33,7 @@
     var printRef = new iwc.intents.Reference('/application/json/print');
     var reverseRef = new iwc.intents.Reference('/application/json/print/com.clabas.reverse');
     var capitalizeRef = new iwc.intents.Reference('/application/json/print/com.clabas.capitalize');
+    var jsonRef = new iwc.intents.Reference('/application/json/print/com.netcentric.json-viewer');
 
     var getInputValue = function() {
         return $('#value').val();
@@ -79,6 +80,17 @@
             .catch(updateOutput);
     };
 
+    var printJson = function() {
+        var json = {
+            message: getInputValue(),
+            timestamp: Date.now()
+        };
+
+        jsonRef.invoke(json, logInvokeCallback)
+            .then(updateOutput)
+            .catch(updateOutput);
+    };
+
     var invokeAll = function() {
         printRef.invoke(getInputValue(), logInvokeCallback)
             .then(updateOutput)
@@ -93,6 +105,7 @@
 
     $('#invoke-reverser').click(reverseInput);
     $('#invoke-capper').click(capitalizeInput);
+    $('#invoke-json').click(printJson);
     $('#invoke-all').click(invokeAll);
     $('#broadcast').click(broadcastIntent);
     $('#clear-log').click(clearLog);

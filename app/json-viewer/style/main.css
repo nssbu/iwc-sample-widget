@@ -1,0 +1,44 @@
+body {
+    background: #e5e5e5;
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+label {
+    font-weight: bold;
+}
+
+#clear-log {
+    float: right;
+}
+
+input#value {
+    width: 75%;
+}
+
+.row {
+    margin-bottom: 5px;
+}
+
+.connection-container {
+    background: rgba(158, 56, 56, 0.75);
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+.connection-container.connected {
+    background: rgba(47, 181, 69, 0.75);
+}
+
+.json {
+    flex-grow: 1;
+    background: #b1b1b1;
+    border-radius: 3px;
+    padding: 0 15px;
+    font-size: 1.25em;
+}
