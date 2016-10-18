@@ -1,32 +1,41 @@
+body {
+    background: #e5e5e5;
+    display: flex;
+}
+
 .content {
-    width: 95%;
-    height: 100%;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 label {
     font-weight: bold;
 }
 
-#clear-log {
-    float: right;
-}
-
-input#value {
-    width: 75%;
-}
-
 .row {
     margin-bottom: 5px;
-    width: 100%;
+    display: flex;
+}
+
+.button-row {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.input-row {
+    flex-wrap: wrap;
+}
+
+.input-row input{
+    flex-grow: 1;
+    margin-left: 5px;
 }
 
 .connection-container {
     background: rgba(158, 56, 56, 0.75);
     padding: 2px 4px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .connection-container.connected {
@@ -34,15 +43,17 @@ input#value {
 }
 
 .intent-log {
-    overflow-y: scroll;
-    height: 100%;
-    border: 2px inset;
+    overflow: auto;
     padding: 2px 5px;
+    flex-grow: 1;
+    height: 0px;
+    background: #b1b1b1;
+    border-radius: 3px;
 }
 
 .intent-state {
     margin: 10px 5px;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 3px;
 }
 

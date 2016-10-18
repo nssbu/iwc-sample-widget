@@ -48,7 +48,7 @@ input#value {
 .connection-container {
     background: rgba(158, 56, 56, 0.75);
     padding: 2px 4px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .connection-container.connected {

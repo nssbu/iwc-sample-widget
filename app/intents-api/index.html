@@ -3,37 +3,41 @@
     <style>
         body {
             background: rgba(153, 153, 153, 0.85);
+            display: flex;
         }
 
         .content {
-            height: 100%;
-            width: 100%;
+            display: flex;
+            flex-grow: 1;
         }
 
         .column {
-            float: left;
-            height: 100%;
-            width: 50%;
-        }
-
-        .row {
-            height: 50%;
-            overflow: hidden;
-            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin: 4px;
         }
 
         .iframe-container {
-            height: 100%;
-            width: 95%;
-            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
-            display: block;
-            margin: 0 auto;
-            background: rgba(205, 205, 205, 1);
+            flex-grow: 1;
+        }
+
+        .capper-container {
+            margin-bottom: 3px;
+        }
+
+        .reverser-container {
+            margin-top: 3px;
+        }
+
+        iframe {
+            border-radius: 3px;
+            border: none;
         }
     </style>
 </head>
@@ -46,16 +50,12 @@
         </div>
 
         <div class="column">
-            <div class="row">
                 <div class="iframe-container capper-container">
                     <iframe src="./capper"></iframe>
                 </div>
-            </div>
 
-            <div class="row">
                 <div class="iframe-container reverser-container">
                     <iframe src="./reverser"></iframe>
-                </div>
             </div>
         </div>
     </div>
