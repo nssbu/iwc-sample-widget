@@ -60,4 +60,8 @@
         }).catch(function(error) {
             $('#intent-name').text('Intent registration failed: ' + error);
         });
+
+    $('#clear-log').click(function() {
+        $('.intent-log').empty();
+    });
 })();
