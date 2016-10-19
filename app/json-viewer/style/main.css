@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     background: #e5e5e5;
     display: flex;
@@ -7,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 8px;
 }
 
 label {
