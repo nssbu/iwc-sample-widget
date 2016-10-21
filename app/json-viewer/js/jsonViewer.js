@@ -20,7 +20,7 @@
         }
     };
 
-    var INTENT_NAME = '/application/json/print/com.netcentric.json-viewer';
+    var INTENT_NAME = '/application/json/print/com.iwc-sample.json-viewer';
 
     // Initialize the connection status display
     getConnectionStatusHandler(false)();

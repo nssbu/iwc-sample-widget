@@ -23,7 +23,7 @@
     // Initialize the connection status display
     getConnectionStatusHandler(false)();
 
-    var INTENT_NAME = '/application/json/print/com.clabas.reverse';
+    var INTENT_NAME = '/application/json/print/com.iwc-sample.reverse';
 
     var iwc = new ozpIwc.Client(iwcSampleConfig.iwcHost);
     // var iwc = new ozpIwc.Client('https://localhost:4440/iwc');

@@ -23,7 +23,7 @@
     // Initialize the connection status display
     getConnectionStatusHandler(false)();
 
-    var INTENT_NAME = '/application/json/print/com.clabas.capitalize';
+    var INTENT_NAME = '/application/json/print/com.iwc-sample.capitalize';
 
     var iwc = new ozpIwc.Client(iwcSampleConfig.iwcHost);
 

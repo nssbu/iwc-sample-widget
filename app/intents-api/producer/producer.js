@@ -32,9 +32,9 @@
         .catch(getConnectionStatusHandler(false));
 
     var printRef = new iwc.intents.Reference('/application/json/print');
-    var reverseRef = new iwc.intents.Reference('/application/json/print/com.clabas.reverse');
-    var capitalizeRef = new iwc.intents.Reference('/application/json/print/com.clabas.capitalize');
-    var jsonRef = new iwc.intents.Reference('/application/json/print/com.netcentric.json-viewer');
+    var reverseRef = new iwc.intents.Reference('/application/json/print/com.iwc-sample.reverse');
+    var capitalizeRef = new iwc.intents.Reference('/application/json/print/com.iwc-sample.capitalize');
+    var jsonRef = new iwc.intents.Reference('/application/json/print/com.iwc-sample.json-viewer');
 
     var getInputValue = function() {
         return $('#value').val();
