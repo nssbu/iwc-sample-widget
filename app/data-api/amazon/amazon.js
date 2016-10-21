@@ -25,7 +25,7 @@
 
     var STORE_NAME = 'amazon';
 
-    var iwc = new ozpIwc.Client('http://localhost:13000');
+    var iwc = new ozpIwc.Client(iwcSampleConfig.iwcHost);
 
     // Only need to call connect() explicitly when we need to handle the promise it returns
     iwc.connect()

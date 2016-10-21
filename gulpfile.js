@@ -1,10 +1,16 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var template = require('gulp-template');
 var del = require('del');
 
 var config = {
     dist: './dist',
     landing: './app/index.html',
+    configTemplate: {
+        src: './app/config.js',
+        dest: 'config.js',
+        localhost: 'http://localhost:13000'
+    },
     data: './app/data-api/**/*',
     intents: {
         dest: './dist/intents-api',
@@ -42,6 +48,15 @@ gulp.task('clean', function() {
 gulp.task('landing', function() {
     return gulp.src(config.landing)
         .pipe(gulp.dest(config.dist))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('config', function() {
+    return gulp.src(config.configTemplate.src)
+        .pipe(template({iwcHost: config.configTemplate.localhost}))
+        .pipe(gulp.dest(config.intents.dest))
+        .pipe(gulp.dest(config.data.dest))
+        .pipe(gulp.dest(config.jsonViewer.dest))
         .pipe(browserSync.stream());
 });
 
@@ -101,23 +116,21 @@ gulp.task('json-viewer', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['clean', 'landing', 'data', 'intents', 'json-viewer'], function() {
+gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
     browserSync.init({
-        server: config.dist
+        server: config.dist,
+        https: false
     });
 
     gulp.watch(config.landing, ['landing']);
+    gulp.watch(config.configTemplate.src, ['config']);
 
-    gulp.watch(config.data.main, ['data']);
-    gulp.watch(config.data.css, ['data']);
-    gulp.watch(config.data.common, ['data']);
+    gulp.watch([config.data.main, config.data.css, config.data.common], ['data']);
     gulp.watch(config.data.amazon, ['amazon']);
     gulp.watch(config.data.bestbuy, ['bestbuy']);
     gulp.watch(config.data.cart, ['cart']);
 
-    gulp.watch(config.intents.main, ['intents']);
-    gulp.watch(config.intents.css, ['intents']);
-    gulp.watch(config.intents.common, ['intents']);
+    gulp.watch([config.intents.main, config.intents.css, config.intents.common], ['intents']);
     gulp.watch(config.intents.capper, ['capper']);
     gulp.watch(config.intents.reverser, ['reverser']);
     gulp.watch(config.intents.producer, ['producer']);

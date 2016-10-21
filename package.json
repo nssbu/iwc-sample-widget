@@ -1,21 +1,22 @@
 {
-    "name": "iwc-sample-widgets",
-    "version": "1.0.0",
-    "description": "Sample widgets to demonstrate the capabilities of IWC",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "http://dev1.vistronix.com:9080/ozp/iwc-sample-widgets.git"
-    },
-    "author": "Charles Labas (charles.labas@vistronix.com)",
-    "license": "ISC",
-    "private": true,
-    "devDependencies": {
-        "browser-sync": "^2.17.0",
-        "del": "^2.2.2",
-        "gulp": "^3.9.1"
-    }
+  "name": "iwc-sample-widgets",
+  "version": "1.0.0",
+  "description": "Sample widgets to demonstrate the capabilities of IWC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://dev1.vistronix.com:9080/ozp/iwc-sample-widgets.git"
+  },
+  "author": "Charles Labas (charles.labas@vistronix.com)",
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.17.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-template": "^4.0.0"
+  }
 }
