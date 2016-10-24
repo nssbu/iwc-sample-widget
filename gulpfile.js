@@ -1,9 +1,11 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var template = require('gulp-template');
+var zip = require('gulp-zip');
 var del = require('del');
 
 var config = {
+    tmp: './tmp',
     dist: './dist',
     landing: './app/index.html',
     configTemplate: {
@@ -13,7 +15,7 @@ var config = {
     },
     data: './app/data-api/**/*',
     intents: {
-        dest: './dist/intents-api',
+        dest: './tmp/intents-api',
         main: './app/intents-api/index.html',
         css: './app/intents-api/style/**/*',
         vendor: './app/intents-api/vendor/**/*',
@@ -23,7 +25,7 @@ var config = {
         producer: './app/intents-api/producer/**/*'
     },
     data: {
-        dest: './dist/data-api',
+        dest: './tmp/data-api',
         main: './app/data-api/index.html',
         css: './app/data-api/style/**/*',
         vendor: './app/data-api/vendor/**/*',
@@ -33,7 +35,7 @@ var config = {
         cart: './app/data-api/cart/**/*'
     },
     jsonViewer: {
-        dest: './dist/json-viewer',
+        dest: './tmp/json-viewer',
         src: './app/json-viewer/**/*'
     }
 };
@@ -41,13 +43,14 @@ var config = {
 gulp.task('clean', function() {
     // del.sync() ensures the clean task finishes before others begin
     del.sync([
+        config.tmp,
         config.dist
     ]);
 });
 
 gulp.task('landing', function() {
     return gulp.src(config.landing)
-        .pipe(gulp.dest(config.dist))
+        .pipe(gulp.dest(config.tmp))
         .pipe(browserSync.stream());
 });
 
@@ -118,7 +121,7 @@ gulp.task('json-viewer', function() {
 
 gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
     browserSync.init({
-        server: config.dist,
+        server: config.tmp,
         https: false
     });
 
@@ -136,6 +139,12 @@ gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewe
     gulp.watch(config.intents.producer, ['producer']);
 
     gulp.watch(config.jsonViewer.src, ['json-viewer']);
+});
+
+gulp.task('build', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
+    gulp.src(config.tmp + '/**/*')
+        .pipe(zip('iwc-sample-widgets.war'))
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('default', ['serve']);
