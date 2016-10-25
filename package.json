@@ -18,6 +18,10 @@
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-template": "^4.0.0",
-    "gulp-zip": "^3.2.0"
+    "gulp-zip": "^3.2.0",
+    "yargs": "^6.3.0"
+  },
+  "dependencies": {
+    "ozpIwc": "http://dev1.vistronix.com:9080/ozp/ozp-iwc/repository/archive.tar.gz?ref=1.2.4"
   }
 }

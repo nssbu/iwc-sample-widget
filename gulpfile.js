@@ -3,15 +3,21 @@ var browserSync = require('browser-sync').create();
 var template = require('gulp-template');
 var zip = require('gulp-zip');
 var del = require('del');
+var argv = require('yargs').argv;
 
 var config = {
     tmp: './tmp',
     dist: './dist',
+    warName: 'iwc-sample-widgets.war',
+    host: argv.host && argv.port ? argv.host + ':' + argv.port : 'http://localhost:13000',
+    https: argv.https,
     landing: './app/index.html',
     configTemplate: {
         src: './app/config.js',
-        dest: 'config.js',
-        localhost: 'http://localhost:13000'
+        dest: 'config.js'
+    },
+    vendor: {
+        ozpIwc: './node_modules/ozpIwc/dist/js/ozpIwc-client.min.js'
     },
     data: './app/data-api/**/*',
     intents: {
@@ -56,7 +62,7 @@ gulp.task('landing', function() {
 
 gulp.task('config', function() {
     return gulp.src(config.configTemplate.src)
-        .pipe(template({iwcHost: config.configTemplate.localhost}))
+        .pipe(template({ iwcHost: config.host }))
         .pipe(gulp.dest(config.intents.dest))
         .pipe(gulp.dest(config.data.dest))
         .pipe(gulp.dest(config.jsonViewer.dest))
@@ -89,19 +95,19 @@ gulp.task('data', ['amazon', 'bestbuy', 'cart'], function() {
 
 // Intents API tasks
 gulp.task('capper', function() {
-    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor, config.intents.common])
+    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.intents.dest + '/capper'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('reverser', function() {
-    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor, config.intents.common])
+    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.intents.dest + '/reverser'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('producer', function() {
-    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor, config.intents.common])
+    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.intents.dest + '/producer'))
         .pipe(browserSync.stream());
 });
@@ -114,7 +120,7 @@ gulp.task('intents', ['capper', 'reverser', 'producer'], function() {
 
 // Json Viewer task
 gulp.task('json-viewer', function() {
-    return gulp.src(config.jsonViewer.src)
+    return gulp.src([config.jsonViewer.src, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.jsonViewer.dest))
         .pipe(browserSync.stream());
 });
@@ -122,7 +128,7 @@ gulp.task('json-viewer', function() {
 gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
     browserSync.init({
         server: config.tmp,
-        https: false
+        https: config.https
     });
 
     gulp.watch(config.landing, ['landing']);
@@ -143,7 +149,7 @@ gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewe
 
 gulp.task('build', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
     gulp.src(config.tmp + '/**/*')
-        .pipe(zip('iwc-sample-widgets.war'))
+        .pipe(zip(config.warName))
         .pipe(gulp.dest(config.dist));
 });
 
