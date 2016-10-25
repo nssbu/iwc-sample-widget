@@ -71,19 +71,19 @@ gulp.task('config', function() {
 
 // Data API tasks
 gulp.task('amazon', function() {
-    return gulp.src([config.data.amazon, config.data.css, config.data.vendor, config.data.common])
+    return gulp.src([config.data.amazon, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.data.dest + '/amazon'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('bestbuy', function() {
-    return gulp.src([config.data.bestbuy, config.data.css, config.data.vendor, config.data.common])
+    return gulp.src([config.data.bestbuy, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.data.dest + '/bestbuy'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('cart', function() {
-    return gulp.src([config.data.cart, config.data.css, config.data.vendor, config.data.common])
+    return gulp.src([config.data.cart, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
         .pipe(gulp.dest(config.data.dest + '/cart'))
         .pipe(browserSync.stream());
 });
