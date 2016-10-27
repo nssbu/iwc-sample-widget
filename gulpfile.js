@@ -16,9 +16,10 @@ var config = {
         src: './app/config.js',
         dest: 'config.js'
     },
-    vendor: {
-        ozpIwc: './node_modules/ozpIwc/dist/js/ozpIwc-client.min.js'
-    },
+    vendor: [
+        './node_modules/ozpIwc/dist/js/ozpIwc-client.min.js',
+        './node_modules/jquery/dist/jquery.min.js'
+    ],
     data: './app/data-api/**/*',
     intents: {
         dest: './tmp/intents-api',
@@ -71,19 +72,19 @@ gulp.task('config', function() {
 
 // Data API tasks
 gulp.task('amazon', function() {
-    return gulp.src([config.data.amazon, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
+    return gulp.src([config.data.amazon, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
         .pipe(gulp.dest(config.data.dest + '/amazon'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('bestbuy', function() {
-    return gulp.src([config.data.bestbuy, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
+    return gulp.src([config.data.bestbuy, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
         .pipe(gulp.dest(config.data.dest + '/bestbuy'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('cart', function() {
-    return gulp.src([config.data.cart, config.data.css, config.data.vendor, config.data.common, config.vendor.ozpIwc])
+    return gulp.src([config.data.cart, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
         .pipe(gulp.dest(config.data.dest + '/cart'))
         .pipe(browserSync.stream());
 });
@@ -95,19 +96,19 @@ gulp.task('data', ['amazon', 'bestbuy', 'cart'], function() {
 
 // Intents API tasks
 gulp.task('capper', function() {
-    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
+    return gulp.src([config.intents.capper, config.intents.css, config.intents.vendor, config.intents.common].concat(config.vendor))
         .pipe(gulp.dest(config.intents.dest + '/capper'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('reverser', function() {
-    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
+    return gulp.src([config.intents.reverser, config.intents.css, config.intents.vendor, config.intents.common].concat(config.vendor))
         .pipe(gulp.dest(config.intents.dest + '/reverser'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('producer', function() {
-    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor, config.intents.common, config.vendor.ozpIwc])
+    return gulp.src([config.intents.producer, config.intents.css, config.intents.vendor, config.intents.common].concat(config.vendor))
         .pipe(gulp.dest(config.intents.dest + '/producer'))
         .pipe(browserSync.stream());
 });
@@ -120,7 +121,7 @@ gulp.task('intents', ['capper', 'reverser', 'producer'], function() {
 
 // Json Viewer task
 gulp.task('json-viewer', function() {
-    return gulp.src([config.jsonViewer.src, config.vendor.ozpIwc])
+    return gulp.src([config.jsonViewer.src].concat(config.vendor))
         .pipe(gulp.dest(config.jsonViewer.dest))
         .pipe(browserSync.stream());
 });
