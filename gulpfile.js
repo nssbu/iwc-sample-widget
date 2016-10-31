@@ -37,9 +37,9 @@ var config = {
         css: './app/data-api/style/**/*',
         vendor: './app/data-api/vendor/**/*',
         common: './app/data-api/common/**/*',
-        amazon: './app/data-api/amazon/**/*',
-        bestbuy: './app/data-api/bestbuy/**/*',
-        cart: './app/data-api/cart/**/*'
+        clickAction: './app/data-api/click-action/**/*',
+        messageAction: './app/data-api/message-action/**/*',
+        actionCounter: './app/data-api/action-counter/**/*'
     },
     jsonViewer: {
         dest: './tmp/json-viewer',
@@ -71,25 +71,25 @@ gulp.task('config', function() {
 });
 
 // Data API tasks
-gulp.task('amazon', function() {
-    return gulp.src([config.data.amazon, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
-        .pipe(gulp.dest(config.data.dest + '/amazon'))
+gulp.task('clickAction', function() {
+    return gulp.src([config.data.clickAction, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
+        .pipe(gulp.dest(config.data.dest + '/click-action'))
         .pipe(browserSync.stream());
 });
 
-gulp.task('bestbuy', function() {
-    return gulp.src([config.data.bestbuy, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
-        .pipe(gulp.dest(config.data.dest + '/bestbuy'))
+gulp.task('messageAction', function() {
+    return gulp.src([config.data.messageAction, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
+        .pipe(gulp.dest(config.data.dest + '/message-action'))
         .pipe(browserSync.stream());
 });
 
-gulp.task('cart', function() {
-    return gulp.src([config.data.cart, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
-        .pipe(gulp.dest(config.data.dest + '/cart'))
+gulp.task('actionCounter', function() {
+    return gulp.src([config.data.actionCounter, config.data.css, config.data.vendor, config.data.common].concat(config.vendor))
+        .pipe(gulp.dest(config.data.dest + '/action-counter'))
         .pipe(browserSync.stream());
 });
 
-gulp.task('data', ['amazon', 'bestbuy', 'cart'], function() {
+gulp.task('data', ['clickAction', 'messageAction', 'actionCounter'], function() {
     return gulp.src(config.data.main)
         .pipe(gulp.dest(config.data.dest));
 });
@@ -136,9 +136,9 @@ gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewe
     gulp.watch(config.configTemplate.src, ['config']);
 
     gulp.watch([config.data.main, config.data.css, config.data.common], ['data']);
-    gulp.watch(config.data.amazon, ['amazon']);
-    gulp.watch(config.data.bestbuy, ['bestbuy']);
-    gulp.watch(config.data.cart, ['cart']);
+    gulp.watch(config.data.clickAction, ['clickAction']);
+    gulp.watch(config.data.messageAction, ['messageAction']);
+    gulp.watch(config.data.actionCounter, ['actionCounter']);
 
     gulp.watch([config.intents.main, config.intents.css, config.intents.common], ['intents']);
     gulp.watch(config.intents.capper, ['capper']);

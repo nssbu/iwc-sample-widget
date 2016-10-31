@@ -34,7 +34,7 @@ label {
     flex-wrap: wrap;
 }
 
-.input-row input{
+.input-row input {
     flex-grow: 1;
     margin-left: 5px;
 }

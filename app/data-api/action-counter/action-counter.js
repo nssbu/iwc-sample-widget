@@ -23,6 +23,10 @@
     // Initialize the connection status display
     getConnectionStatusHandler(false)();
 
+    // Cache the DOM elements we'll use frequently
+    var $newItemSpan = $('.new-item span');
+    var $actionLogCollection = $('.action-log .collection');
+
     var iwc = new ozpIwc.Client(iwcSampleConfig.iwcHost);
 
     // Only need to call connect() explicitly when we need to handle the promise it returns
@@ -30,37 +34,34 @@
         .then(getConnectionStatusHandler(true))
         .catch(getConnectionStatusHandler(false));
 
-    var shoppingCartRef = new iwc.data.Reference('/shoppingCart', { collect: true });
+    var actionsRef = new iwc.data.Reference('/actions', { collect: true });
 
-    var cart = {
-        total: 0,
-        count: 0,
-        items: []
+    var getReference = function(reference) {
+        return new iwc.data.Reference(reference);
     };
 
-    var updateDisplay = function(value) {
-        $('#output').text(JSON.stringify(value));
+    var updateCollectionDisplay = function(collection) {
+        getReference(collection[collection.length - 1]).get()
+            .then(function(value) {
+                $newItemSpan.text(value.name + ' created by: \'' + value.creationMethod + '\' on: ' + value.timestamp);
+            });
+
+        collection.forEach(function(item) {
+            $actionLogCollection.append('<div>' + item + '</div>');
+        });
+
+        $actionLogCollection.scrollTop($actionLogCollection[0].scrollHeight);
     };
 
     var onChange = function(change, done) {
-        console.log('Shopping cart changed', change);
-        // shoppingCartRef.list()
-        //     .then(function(resources) {
-        //         resources.forEach(function(resource) {
-        //             var reference = new iwc.data.Reference(resource);
-        //             console.log('Resource', resource);
-        //             reference.get()
-        //                 .then(function(response) {
-        //                     // console.log('Resource response', response);
-        //                 });
-        //         });
-        //     });
+        $actionLogCollection.empty();
+        updateCollectionDisplay(change.newCollection);
     };
 
-    var onInitialize = function(response) {
-        console.log('Shopping cart initialized', response);
+    var onInitialize = function() {
+        actionsRef.list().then(updateCollectionDisplay);
     };
 
-    shoppingCartRef.watch(onChange)
+    actionsRef.watch(onChange)
         .then(onInitialize);
 })();

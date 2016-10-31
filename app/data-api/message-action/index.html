@@ -8,13 +8,16 @@
             <span id="connection"></span>
         </div>
 
+        <div class="row">
+            <label>Enter a Message to Propagate Changes</label>
+        </div>
         <div class="row input-row">
-            <div>
-                <label>Enter a Message to Propagate Changes: </label>
+            <div class="input-container">
+                <input id="message" placeholder="Enter a string message">
+                <button id="add-message">Add message</button>
             </div>
-            <input id="value" placeholder="Enter a string message">
             <div>
-                <button id="clear-log">Clear Log</button>
+                <button id="remove-all">Remove All</button>
             </div>
         </div>
 
@@ -25,6 +28,6 @@
     <script src="dataUtils.js"></script>
     <script src="jquery.min.js"></script>
     <script src="../config.js"></script>
-    <script src="bestbuy.js"></script>
+    <script src="message-action.js"></script>
 </body>
 </html>

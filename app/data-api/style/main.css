@@ -1,48 +1,51 @@
-.content {
-    width: 95%;
+html, body {
     height: 100%;
-    margin: 0 auto;
+    margin: 0;
+}
+
+body {
+    background: #e5e5e5;
+    display: flex;
+}
+
+.content {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-}
-
-.item-container {
-    display: flex;
-}
-
-.item-list {
     flex-grow: 1;
-    flex-direction: column;
-    overflow: auto;
+    margin: 8px;
 }
 
-.item {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    margin: 2px 0;
-}
-
-.item-column {
-    margin: 0 15px;
-}
-
-.item .name, label {
+label {
     font-weight: bold;
-}
-
-#clear-log {
-    float: right;
-}
-
-input#value {
-    width: 75%;
 }
 
 .row {
     margin-bottom: 5px;
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-row {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.input-row {
+    flex-wrap: wrap;
+}
+
+.input-container {
+    display: flex;
+    flex-grow: 1;
+}
+
+.input-container input {
+    flex-grow: 1;
+}
+
+.input-container button {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .connection-container {
@@ -53,4 +56,75 @@ input#value {
 
 .connection-container.connected {
     background: rgba(47, 181, 69, 0.75);
+}
+
+.action-log {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-log .new-item {
+    margin-bottom: 5px;
+}
+
+.action-log .collection {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.actions.action-log {
+    overflow: hidden;
+}
+
+.action-log {
+    overflow: auto;
+    padding: 10px;
+    flex-grow: 1;
+    height: 0px;
+    background: #b1b1b1;
+    border-radius: 3px;
+}
+
+.action-log-entry {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px;
+    background: #d2d2d2;
+    border-radius: 3px;
+    margin: 2px 0;
+    flex-shrink: 0;
+}
+
+.action-log span {
+    margin: 0 18px 0 7px;
+}
+
+.intent-state {
+    margin: 10px 5px;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.intent-state.init {
+    background: white;
+}
+
+.intent-state.choosing {
+    background: lightyellow;
+}
+
+.intent-state.delivering {
+    background: lightsalmon;
+}
+
+.intent-state.running {
+    background: lightskyblue;
+}
+
+.intent-state.complete {
+    background: lightgreen;
+}
+
+.intent-state.error {
+    background: lightcoral;
 }

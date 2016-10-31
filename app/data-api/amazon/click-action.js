@@ -23,8 +23,6 @@
     // Initialize the connection status display
     getConnectionStatusHandler(false)();
 
-    var STORE_NAME = 'amazon';
-
     var iwc = new ozpIwc.Client(iwcSampleConfig.iwcHost);
 
     // Only need to call connect() explicitly when we need to handle the promise it returns
@@ -32,43 +30,32 @@
         .then(getConnectionStatusHandler(true))
         .catch(getConnectionStatusHandler(false));
 
-    var amazonCartRef = new iwc.data.Reference('/shoppingCart/' + STORE_NAME, { collect: true });
+    var clickRef = new iwc.data.Reference('/actions/click');
 
-    var cart = {
-        total: 0,
+    var action = {
+        type: 'click',
         count: 0,
-        items: []
+        lastAction: undefined
     };
 
-    var createItem = function() {
-        var item = dataUtils.createItem(STORE_NAME);
+    $('#update').click(function() {
+        action.count++;
+        action.lastAction = Date.now();
 
-        var itemRef = new iwc.data.Reference('/shoppingCart/' + STORE_NAME + '/' + item.upc);
-        itemRef.set(item);
+        clickRef.set(action);
 
-        cart.items.push(item);
+        var actionLog = $('.action-log');
 
-        $('.item-list').append(dataUtils.createItemHtml(item));
-    };
+        actionLog.append('<div>' +
+                '<label>Clicks: </label><span>' + action.count + '</span>' +
+                '<label>Last action: </label><span>' + action.lastAction + '</span>' +
+            '</div>');
 
-    var updateCart = function(item) {
-        var total = 0;
-        var count = 0;
+        actionLog.scrollTop(actionLog[0].scrollHeight);
+    });
 
-        cart.items.forEach(function(item) {
-            total += (item.price * item.quantity);
-            count += item.quantity;
-        });
-
-        cart.total = total;
-        cart.count = count;
-
-        amazonCartRef.set(cart);
-    }
-
-    $('#add-item').click(function() {
-        createItem();
-        updateCart();
+    $('#clear-log').click(function() {
+        $('.action-log').empty();
     });
 
 })();
