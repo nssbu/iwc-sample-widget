@@ -20,6 +20,10 @@ var config = {
         './node_modules/ozpIwc/dist/js/ozpIwc-client.min.js',
         './node_modules/jquery/dist/jquery.min.js'
     ],
+    images: {
+        src: './app/images/**/*',
+        dest: './tmp/images'
+    },
     data: './app/data-api/**/*',
     intents: {
         dest: './tmp/intents-api',
@@ -68,6 +72,12 @@ gulp.task('config', function() {
         .pipe(gulp.dest(config.data.dest))
         .pipe(gulp.dest(config.jsonViewer.dest))
         .pipe(browserSync.stream());
+});
+
+// Images
+gulp.task('images', function() {
+    return gulp.src(config.images.src)
+        .pipe(gulp.dest(config.images.dest));
 });
 
 // Data API tasks
@@ -148,7 +158,7 @@ gulp.task('serve', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewe
     gulp.watch(config.jsonViewer.src, ['json-viewer']);
 });
 
-gulp.task('build', ['clean', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
+gulp.task('build', ['clean', 'images', 'landing', 'config', 'data', 'intents', 'json-viewer'], function() {
     gulp.src(config.tmp + '/**/*')
         .pipe(zip(config.warName))
         .pipe(gulp.dest(config.dist));
