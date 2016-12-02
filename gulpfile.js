@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var template = require('gulp-template');
+var shell = require('gulp-shell');
 var zip = require('gulp-zip');
 var del = require('del');
 var argv = require('yargs').argv;
@@ -163,5 +164,9 @@ gulp.task('build', ['clean', 'images', 'landing', 'config', 'data', 'intents', '
         .pipe(zip(config.warName))
         .pipe(gulp.dest(config.dist));
 });
+
+gulp.task('tarDistDate', shell.task([
+    './packageRelease.sh iwc-sample-widgets-debug tmp'
+]));
 
 gulp.task('default', ['serve']);
